@@ -1,0 +1,4 @@
+dados/labirintos/maze10x10_obstaculos_1.bin
+9 0
+0 9
+DUMMY
