@@ -52,14 +52,14 @@ void _node_expand(Node *n, Labirinto *l, Stack *to_expand, Stack *expanded)
         if (pos_y < 0 ||  pos_y >= labirinto_n_linhas(l))
             continue;
         
-        c = labirinto_obter(l, pos_x, pos_y);
+        c = labirinto_obter(l, pos_y, pos_x);
         if (c == OCUPADO || c == EXPANDIDO || (pos_x == n->atual.x && pos_y == n->atual.y) || c == FRONTEIRA)
             continue;
         
         stack_push(to_expand, _node_construct(pos_x, pos_y, n));
-        labirinto_atribuir(l, pos_x, pos_y, FRONTEIRA);
+        labirinto_atribuir(l, pos_y, pos_x, FRONTEIRA);
     }
-    labirinto_atribuir(l, n->atual.x, n->atual.y, EXPANDIDO);
+    labirinto_atribuir(l, n->atual.y, n->atual.x, EXPANDIDO);
     stack_push(expanded, n);
 }
 
@@ -109,7 +109,7 @@ ResultData depth_first_search(Labirinto *l, Celula inicio, Celula fim)
     Stack *fronteira = stack_construct();
     stack_push(fronteira, _node_construct(inicio.x, inicio.y, NULL));
     Stack *expandidos = stack_construct();
-    Node *pos_atual = NULL, *pos_fin = NULL, *path_node = NULL;
+    Node *pos_atual = NULL, *pos_fin = _node_construct(fim.x, fim.y, NULL), *path_node = NULL;
 
     while (stack_empty(fronteira) == 0)
     {
@@ -119,6 +119,7 @@ ResultData depth_first_search(Labirinto *l, Celula inicio, Celula fim)
         {
             result.sucesso = 1;
             stack_push(expandidos, pos_atual);
+            _node_destroy(pos_fin);
             pos_fin = pos_atual;
             break;
         }
@@ -147,6 +148,8 @@ ResultData depth_first_search(Labirinto *l, Celula inicio, Celula fim)
 
         _path_reverse(result.caminho, result.tamanho_caminho);
     }
+    else
+        _node_destroy(pos_fin);
 
     stack_destroy(expandidos, _node_destroy);
     stack_destroy(fronteira, _node_destroy);
