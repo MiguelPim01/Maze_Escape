@@ -1,4 +1,4 @@
 dados/labirintos/maze20x40_obstaculos_1.bin
-0 0
-19 39
+9 21
+0 11
 DFS
