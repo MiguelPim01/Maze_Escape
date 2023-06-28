@@ -156,7 +156,7 @@ ResultData breadth_first_search(Labirinto *l, Celula inicio, Celula fim)
     if (result.sucesso)
     {
         path_node = pos_fin;
-        while (path_node != NULL)
+        while (path_node->prev != NULL)
         {
             result.caminho[result.tamanho_caminho].x = path_node->atual.x;
             result.caminho[result.tamanho_caminho].y = path_node->atual.y;
