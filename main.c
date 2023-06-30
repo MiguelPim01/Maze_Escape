@@ -66,7 +66,7 @@ int main()
     print_result(&result);
 
     // descomente para visualizar informacoes de debug no labirinto
-    // mostra_caminho(lab, &result, inicio, fim);
+    mostra_caminho(lab, &result, inicio, fim);
 
     labirinto_destruir(lab);
     if (result.caminho != NULL)

@@ -1,4 +1,4 @@
-dados/labirintos/maze5x5_livre.bin
-0 0
-4 4
-DFS
+dados/labirintos/maze20x40_obstaculos_1.bin
+17 31
+12 11
+BFS
