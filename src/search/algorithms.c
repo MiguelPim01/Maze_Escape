@@ -26,7 +26,8 @@ Node *_node_construct(int x, int y, Node *prev)
 
 double _g(Node *n, Node *prev)
 {
-    int dx, dy, g;
+    int dx, dy;
+    double g;
     if (prev != NULL)
     {
         g = prev->g;
@@ -42,7 +43,8 @@ double _g(Node *n, Node *prev)
 
 double _h(Node *n, Node *fim)
 {
-    int dx, dy, h;
+    int dx, dy;
+    double h;
 
     dx = fim->atual.x - n->atual.x;
     dy = fim->atual.y - n->atual.y;
@@ -83,8 +85,8 @@ int _cmp_node_hash(void *c1, void *c2)
     Node *b = (Node *)c2;
 
     if (a->atual.x == b->atual.x && a->atual.y == b->atual.y)
-        return 1;
-    return 0;
+        return 0;
+    return 1;
 }
 
 int _cmp_node(Node *c1, Node *c2)
@@ -173,7 +175,7 @@ void _node_expand_a_star(Node *n, Node *fim, Labirinto *l, Heap *to_expand, Stac
             continue;
         
         c = labirinto_obter(l, pos_y, pos_x);
-        if (c == OCUPADO || c == EXPANDIDO || (pos_x == n->atual.x && pos_y == n->atual.y) || c == FRONTEIRA)
+        if (c == OCUPADO || c == EXPANDIDO || (pos_x == n->atual.x && pos_y == n->atual.y))
             continue;
         
         clear = _node_construct_a_star(pos_x, pos_y, n, fim);
@@ -283,7 +285,7 @@ ResultData a_star(Labirinto *l, Celula inicio, Celula fim)
 
     hash_table_iterator_destroy(it);
     hash_table_destroy(hash);
-    heap_destroy(fronteira);
+    heap_destroy(fronteira, _node_destroy);
     stack_destroy(expandidos, _node_destroy);
 
     return result;

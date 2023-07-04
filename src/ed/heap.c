@@ -183,7 +183,9 @@ void *heap_pop(Heap *h)
 
 int heap_empty(Heap *h)
 {
-    return h->size == 0;
+    if (h->size == 0)
+        return 1;
+    return 0;
 }
 
 double heap_min_priority(Heap *h)
@@ -191,8 +193,11 @@ double heap_min_priority(Heap *h)
     return h->nodes[0].prioridade;
 }
 
-void heap_destroy(Heap *h)
+void heap_destroy(Heap *h, void (*destroy)(void *))
 {
+    for (int i = 0; i < h->size; i++)
+        destroy(h->nodes[i].data);
+
     free(h->nodes);
     free(h);
 }

@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "cwd": "${workspaceRoot}",
-            "program": "${workspaceRoot}\\main.exe",
+            "program": "${workspaceRoot}\\main",
             "args": [],
             "preLaunchTask": "compilacao",
         }
