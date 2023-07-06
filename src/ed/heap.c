@@ -188,6 +188,11 @@ int heap_empty(Heap *h)
     return 0;
 }
 
+int heap_size(Heap *h)
+{
+    return h->size;
+}
+
 double heap_min_priority(Heap *h)
 {
     return h->nodes[0].prioridade;

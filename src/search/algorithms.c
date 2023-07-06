@@ -231,18 +231,18 @@ ResultData a_star(Labirinto *l, Celula inicio, Celula fim)
     {
         pos_atual = heap_pop(fronteira);
 
+        result.nos_expandidos++;
+
         if (_cmp_node(pos_atual, pos_fin))
         {
             result.sucesso = 1;
             stack_push(expandidos, pos_atual);
             _node_destroy(pos_fin);
             pos_fin = pos_atual;
-            result.nos_expandidos++;
             break;
         }
 
         _node_expand_a_star(pos_atual, pos_fin, l, fronteira, expandidos);
-        result.nos_expandidos++;
     }
 
     result.caminho = (Celula *)malloc(sizeof(Celula)*stack_size(expandidos));

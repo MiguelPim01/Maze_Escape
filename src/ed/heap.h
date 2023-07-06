@@ -13,6 +13,8 @@ void *heap_pop(Heap *h);
 
 int heap_empty(Heap *h);
 
+int heap_size(Heap *h);
+
 double heap_min_priority(Heap *h);
 
 void heap_destroy(Heap *h, void (*destroy)(void *));
